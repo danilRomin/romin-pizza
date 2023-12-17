@@ -1,11 +1,25 @@
-@import 'fonts';
-@import 'variables';
-@import 'libs/normalize';
-
-@import 'components/all';
+@import './fonts.scss';
+@import './variables.scss';
+@import './libs/normalize.scss';
+@import './components/all.scss';
 
 body {
   background-color: $background;
+}
+
+.header__cart {
+  background-color: #fe5f1e;
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  align-items: center;
+  cursor: pointer;
+
+  span:last-child {
+    margin-left: 5px;
+  }
 }
 
 .wrapper {
