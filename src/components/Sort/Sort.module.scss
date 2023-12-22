@@ -1,0 +1,10 @@
+.directionBtn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.svg {
+  transform: rotateX(180deg);
+}

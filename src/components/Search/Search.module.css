@@ -1,0 +1,28 @@
+.input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  width: 300px;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+.input:focus {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.root {
+  position: relative;
+}
+
+.clearBtn {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  opacity: 0.3;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.clearBtn:hover {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=Search.module.css.map */

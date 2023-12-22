@@ -15,16 +15,17 @@ const Categories = ({value, onClickCategory}) => {
         <>
             <div className="categories">
                 <ul>
-                    {categories.map((categoryName, i) =>
-                        <li
-                            key={i}
-                            // Передача i(индекса) родителю через входящий пропс
-                            onClick={() => onClickCategory(i)}
-                            className={value === i ? "active" : undefined}
-                        >
-                            {categoryName}
-                        </li>
-                    )}
+                    {
+                        categories.map((category, i) =>
+                            <li
+                                key={i}
+                                onClick={() => onClickCategory(i)}
+                                className={value === i ? "active" : undefined}
+                            >
+                                {category}
+                            </li>
+                        )
+                    }
                 </ul>
             </div>
         </>
