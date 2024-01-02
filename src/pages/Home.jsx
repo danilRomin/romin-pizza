@@ -10,7 +10,6 @@ import {SearchContext} from "../App";
 const Home = () => {
 
     const {searchValue, setSearchValue} = useContext(SearchContext)
-
     // Текущая страница
     const [currentPage, setCurrentPage] = useState(1)
 

@@ -1,6 +1,10 @@
-import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux"; // useSelector = useContext
+import { decrement } from "../redux/slices/filterSlice"
 
 const Categories = ({value, onClickCategory}) => {
+
+    const filter = useSelector((state) => state.filter.value)
+    const dispatch = useDispatch()
 
     const categories = [
         "Все",

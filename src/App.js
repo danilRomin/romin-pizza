@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
 import {createContext, useState} from "react";
 
+
 export const SearchContext = createContext()
 
 function App() {
