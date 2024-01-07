@@ -1,21 +1,28 @@
 import {useState} from "react";
 import classes from "./Sort.module.css"
+import {useDispatch, useSelector} from "react-redux";
+import {setSort} from "../../redux/slices/filterSlice";
 
-const Sort = ({value, onClickSort, changeDirection}) => {
+const list = [
+    {name: "популярности", sortProperty: "rating"},
+    {name: "цене", sortProperty: "price"},
+    {name: "алфавиту", sortProperty: "title"}
+]
 
-    const list = [
-        {name: "популярности", sortProperty: "rating"},
-        {name: "цене", sortProperty: "price"},
-        {name: "алфавиту", sortProperty: "title"}
-    ]
+const Sort = ({changeDirection}) => {
+
+    const dispatch = useDispatch()
+
+    const sort = useSelector(state => state.filter.sort)
+
     // Открытие/закрытие модального окна
     const [open, setOpen] = useState(false)
     const modalHandler = () => {
         setOpen(prev => !prev)
     }
     // Передача активного элемента в стейт родителю и закрытие модального окна
-    const onClickList = (i) => {
-        onClickSort(i) // Передача в стейт
+    const onClickList = (listItem) => {
+        dispatch(setSort(listItem)) // Передача в стейт
         setOpen(prev => !prev)
     }
 
@@ -53,7 +60,7 @@ const Sort = ({value, onClickSort, changeDirection}) => {
                         </svg>
                     </button>
                     <b>Сортировка по:</b>
-                    <span onClick={modalHandler}>{value.name}</span>
+                    <span onClick={modalHandler}>{sort.name}</span>
                 </div>
 
                 {open &&
@@ -63,7 +70,7 @@ const Sort = ({value, onClickSort, changeDirection}) => {
                                 <li
                                     key={i}
                                     onClick={() => onClickList(listItem)}
-                                    className={listItem.sortProperty === value.sortProperty ? "active" : undefined}
+                                    className={listItem.sortProperty === sort.sortProperty ? "active" : undefined}
                                 >
                                     {listItem.name}
                                 </li>
