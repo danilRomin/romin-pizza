@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import classes from "./Sort.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {setSort} from "../../redux/slices/filterSlice";
@@ -14,21 +14,36 @@ const Sort = ({changeDirection}) => {
     const dispatch = useDispatch()
 
     const sort = useSelector(state => state.filter.sort)
+    const sortRef = useRef()
 
     // Открытие/закрытие модального окна
     const [open, setOpen] = useState(false)
     const modalHandler = () => {
         setOpen(prev => !prev)
     }
+
     // Передача активного элемента в стейт родителю и закрытие модального окна
     const onClickList = (listItem) => {
         dispatch(setSort(listItem)) // Передача в стейт
         setOpen(prev => !prev)
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.composedPath().includes(sortRef.current)) {
+                setOpen(false)
+            }
+        }
+
+        document.body.addEventListener("click", handleClickOutside)
+
+        // Действие при смерти эффекта (willUnmount) при уходе со страницы
+        return () => document.body.removeEventListener("click", handleClickOutside)
+    }, [])
+
     return (
         <>
-            <div className="sort">
+            <div ref={sortRef} className="sort">
                 <div className="sort__label">
                     <button
                         onClick={changeDirection}

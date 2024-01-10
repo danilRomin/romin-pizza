@@ -11,6 +11,7 @@ import axios from "axios";
 
 const Home = () => {
 
+    const {searchValue} = useContext(SearchContext)
     const dispatch = useDispatch()
 
     // Вытаскивание стейтов из redux (вместо useState)
@@ -18,8 +19,6 @@ const Home = () => {
     const onClickCategory = (id) => {
         dispatch(setCategoryId(id)) // Передача активной категории при клике
     }
-
-    const {searchValue} = useContext(SearchContext)
 
     // Массив с пиццами
     const [items, setItems] = useState([])
@@ -73,7 +72,7 @@ const Home = () => {
             <div className="content__items">
                 {isLoading ? skeletons : pizzas}
             </div>
-            <Pagination/>
+            <Pagination currentPage={currentPage}/>
         </>
     );
 };

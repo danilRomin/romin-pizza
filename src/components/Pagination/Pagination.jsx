@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {setCurrentPage} from "../../redux/slices/filterSlice";
 
 
-const Pagination = () => {
+const Pagination = ({currentPage}) => {
 
     const dispatch = useDispatch()
 
@@ -24,6 +24,7 @@ const Pagination = () => {
                 pageCount={2}
                 previousLabel="<"
                 renderOnZeroPageCount={null}
+                forcePage={currentPage - 1}
             />
         </div>
     );
