@@ -10,6 +10,13 @@ const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
 
     const dispatch = useDispatch()
 
+    const cartItem = useSelector(state => state.cart.items.find(obj =>
+        obj.id === id && obj.type === typeNames[activeType] && obj.size === sizes[activeSize]
+    ))
+
+    const addedCount = cartItem ? cartItem.count : 0;
+
+
     const onClickAdd = () => {
         const item = {
             id,
@@ -55,7 +62,7 @@ const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
                     </ul>
                 </div>
                 <div className="pizza-block__bottom">
-                    <div className="pizza-block__price">от {price} ₽</div>
+                    <div className="pizza-block__price">{price} ₽</div>
                     <button onClick={onClickAdd} className="button button--outline button--add">
                         <svg
                             width="12"
@@ -70,7 +77,7 @@ const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
                             />
                         </svg>
                         <span>Добавить</span>
-                         <i>0</i>
+                        {addedCount > 0 && <i>{addedCount}</i>}
 
                     </button>
                 </div>
