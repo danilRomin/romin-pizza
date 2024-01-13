@@ -7,6 +7,8 @@ const Header = () => {
 
     const {totalPrice, items} = useSelector(state => state.cart)
 
+    const totalCount = items.reduce((acc, currentValue) => acc + currentValue.count, 0)
+
     return (
         <>
             <div className="header">
@@ -42,7 +44,7 @@ const Header = () => {
                                 stroke="white"
                             />
                         </svg>
-                        <span>{items.length}</span>
+                        <span>{totalCount}</span>
                     </Link>
                 </div>
             </div>

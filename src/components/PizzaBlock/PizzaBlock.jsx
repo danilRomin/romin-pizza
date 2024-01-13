@@ -8,14 +8,23 @@ const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
     const [activeType, setActiveType] = useState(0)
     const [activeSize, setActiveSize] = useState(0)
 
+    if (activeSize === 1) {
+        price = Math.round(price * 1.5 / 5) * 5;
+    } else if (activeSize === 2) {
+        price = Math.round(price * 2 / 5) * 5;
+    }
+
     const dispatch = useDispatch()
 
+    // Поиск идентичных входящих item && изменение счетчика при дублировании
     const cartItem = useSelector(state => state.cart.items.find(obj =>
-        obj.id === id && obj.type === typeNames[activeType] && obj.size === sizes[activeSize]
+        obj.id === id
+        && obj.type === typeNames[activeType]
+        && obj.size === sizes[activeSize]
     ))
 
+    // Показ счетчика
     const addedCount = cartItem ? cartItem.count : 0;
-
 
     const onClickAdd = () => {
         const item = {
@@ -78,7 +87,6 @@ const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
                         </svg>
                         <span>Добавить</span>
                         {addedCount > 0 && <i>{addedCount}</i>}
-
                     </button>
                 </div>
             </div>
