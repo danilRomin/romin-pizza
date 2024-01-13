@@ -67,7 +67,6 @@ const Home = () => {
                 <Categories value={categoryId} onClickCategory={onClickCategory}/>
                 <Sort changeDirection={changeDirection}/>
             </div>
-            <h2 className="content__title">Все пиццы</h2>
             {/*{isLoading && "Загрузка..."}*/}
             <div className="content__items">
                 {isLoading ? skeletons : pizzas}

@@ -358,6 +358,7 @@ body {
   margin: 35px 0;
 }
 .content__items {
+  margin-top: 60px;
   display: flex;
   flex-wrap: wrap;
 }
