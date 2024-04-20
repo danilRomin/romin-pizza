@@ -40,21 +40,30 @@ const Home = () => {
         setCategoryDirection(categoryClicked ? "desc" : "asc")
     }
 
-    useEffect(() => {
+    const fetchPizza = async () => {
+
         setIsLoading(true)
         const sortBy = sort.sortProperty
         const order = categoryDirection
         const category = categoryId > 0 ? `category=${categoryId}` : ""
         const search = searchValue ? `&search=${searchValue}` : ""
 
-        axios.get(`https://6576d8e9197926adf62c94c2.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`)
-            .then((res) => {
-                setItems(res.data)
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 100)
-            })
+        // Запрос
+        const res = await axios.get(`https://6576d8e9197926adf62c94c2.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`)
+
+        setItems(res.data) // Массив данных с сервера
+        setIsLoading(false)
+        console.log("axios")
+
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+    }
+
+    useEffect(() => {
+        fetchPizza()
     }, [categoryId, sort.sortProperty, categoryDirection, searchValue, currentPage])
+
+    // [categoryId, sort.sortProperty, categoryDirection, searchValue, currentPage]
+
 
     // Поиск
     const pizzas = items.map((pizza, i) => <PizzaBlock key={i} {...pizza}/>)

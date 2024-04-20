@@ -1,4 +1,3 @@
-
 const Categories = ({value, onClickCategory}) => {
 
     const categories = [
